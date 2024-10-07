@@ -7,10 +7,17 @@
 
 import Foundation
 
-struct MlinkEvent {
+public struct MlinkEventPayload {
+    
+    public init(userId: Int, lineItems: [Int], products: [MlinkEventProduct]?) {
+        self.userId = userId
+        self.lineItems = lineItems
+        self.products = products
+    }
+    
     let userId: Int
     let lineItems: [Int]
-    let products: [MlinkProduct]?
+    let products: [MlinkEventProduct]?
     
     enum CodingKeys: String, CodingKey {
         case userId = "UserID"
@@ -19,10 +26,16 @@ struct MlinkEvent {
     }
 }
 
-struct MlinkProduct {
+public struct MlinkEventProduct {
     let barcode: Int
     let quantity: Int
     let price: Double
+    
+    public init(barcode: Int, quantity: Int, price: Double) {
+        self.barcode = barcode
+        self.quantity = quantity
+        self.price = price
+    }
     
     enum CodingKeys: String, CodingKey {
         case barcode = "Barcode"

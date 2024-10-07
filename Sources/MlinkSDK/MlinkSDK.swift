@@ -3,12 +3,60 @@
 
 import Foundation
 
-public class Logger {
+public class Mlink {
     
-    static public func printLog(_ text: String?) {
-        if let text {
-            print("MlinkSDK: 🚀🚀🚀🚀 \(text) 🚀🚀🚀🚀")
+    public class Event {
+        
+        public class Home {
+            static public func viewEvent(with payload: MlinkEventPayload) {
+                MlinkNetworkManager().baseRequest(with: payload)
+            }
+            
+            static public func addToCart(with payload: MlinkEventPayload) {
+                MlinkNetworkManager().baseRequest(with: payload)
+            }
+        }
+        
+        public class List {
+            static public func viewEvent(with payload: MlinkEventPayload) {
+                MlinkNetworkManager().baseRequest(with: payload)
+            }
+            
+            static public func addToCart(with payload: MlinkEventPayload) {
+                MlinkNetworkManager().baseRequest(with: payload)
+            }
+        }
+        
+        public class Search {
+            static public func viewEvent(with payload: MlinkEventPayload) {
+                MlinkNetworkManager().baseRequest(with: payload)
+            }
+            
+            static public func addToCart(with payload: MlinkEventPayload) {
+                MlinkNetworkManager().baseRequest(with: payload)
+            }
+        }
+        
+        public class ProductDetails {
+            static public func viewEvent(with payload: MlinkEventPayload) {
+                MlinkNetworkManager().baseRequest(with: payload)
+            }
+            
+            static public func addToCart(with payload: MlinkEventPayload) {
+                MlinkNetworkManager().baseRequest(with: payload)
+            }
+        }
+        
+        public class Cart {
+            static public func viewEvent(with payload: MlinkEventPayload) {
+                MlinkNetworkManager().baseRequest(with: payload)
+            }
+        }
+        
+        public class Purchase {
+            static public func successEvent(with payload: MlinkEventPayload) {
+                MlinkNetworkManager().baseRequest(with: payload)
+            }
         }
     }
-    
 }

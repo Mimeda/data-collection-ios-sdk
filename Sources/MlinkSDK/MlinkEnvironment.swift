@@ -8,6 +8,7 @@
 import Foundation
 
 public enum MlinkEnvironment {
+    case dev
     case staging
     case prod
 }
@@ -15,6 +16,8 @@ public enum MlinkEnvironment {
 extension MlinkEnvironment {
     var urlString: String {
         switch self {
+        case .dev:
+            return "https://collector.avvamobiledemo.com/im.gif?"
         case .staging:
             return "https://mlink-dc.avvamobiledemo.com/im.gif?"
         case .prod:
