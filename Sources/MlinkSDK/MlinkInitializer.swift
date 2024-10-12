@@ -8,20 +8,23 @@
 import Foundation
 
 final public class MlinkInitializer {
-    static var baseDomain: String?
     static var appId: Int!
-    static var environment: MlinkEnvironment = .staging
+    static var publisher: String!
+    static var isLogEnabled: Bool!
     
-    /// Initialize
+    static var version: String = "1.0.0.0"
+    static var isInitialized: Bool = false
+    
+    
+    /// Description
     /// - Parameters:
-    ///   - baseDomain: Optional parameter for initialization because there is already default domain.
-    ///   - appId: Obligatory parameter for initialization.
-    ///   - environment: Emphasize that whether prod or staging.
-    static public func initialize(baseDomain: String? = nil, appId: Int, environment: MlinkEnvironment) {
-        MlinkInitializer.baseDomain = baseDomain
+    ///   - appId: obligatory appId pass during initialize
+    ///   - publisher: obligatory publisher pass during initialize
+    ///   - isLogEnabled: optional isLogEnabled pass during initialize, default true
+    static public func initialize(appId: Int, publisher: String, isLogEnabled: Bool = true) {
         MlinkInitializer.appId = appId
-        MlinkInitializer.environment = environment
-        
-        // Initialize Request
+        MlinkInitializer.publisher = publisher
+        MlinkInitializer.isLogEnabled = isLogEnabled
+        MlinkInitializer.isInitialized = true
     }
 }

@@ -15,8 +15,8 @@ public struct MlinkEventPayload {
         self.products = products
     }
     
-    let userId: Int
-    let lineItems: [Int]
+    let userId: Int?
+    let lineItems: [Int]?
     let products: [MlinkEventProduct]?
     
     enum CodingKeys: String, CodingKey {
@@ -27,9 +27,9 @@ public struct MlinkEventPayload {
 }
 
 public struct MlinkEventProduct {
-    let barcode: Int
-    let quantity: Int
-    let price: Double
+    let barcode: Int?
+    let quantity: Int?
+    let price: Double?
     
     public init(barcode: Int, quantity: Int, price: Double) {
         self.barcode = barcode
