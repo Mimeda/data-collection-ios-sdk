@@ -1,9 +1,4 @@
-//
-//  File.swift
-//  
-//
-//  Created by Sezgin Çiftci on 15.08.2024.
-//
+
 
 import UIKit
 
@@ -60,13 +55,13 @@ final class MlinkNetworkManager {
             URLQueryItem(name: "uid", value: String(payload.userId ?? 0)),
             URLQueryItem(name: "lng", value: "\(Locale.current.identifier)".replacingOccurrences(of: "_", with: "-")),
             URLQueryItem(name: "p", value: "apple-ios-\(UIDevice.current.systemVersion)"),
-            URLQueryItem(name: "s", value: "444"),
+            URLQueryItem(name: "s", value: configureSessionId),
             URLQueryItem(name: "en", value: en),
             URLQueryItem(name: "ep", value: ep)
         ]
         
         // Add line items if available
-        if let lineItems = payload.lineItems {
+        if let lineItems = payload.adIDList {
             let lineItemsString = lineItems.map { "\($0)" }.joined(separator: ",")
             queryItems.append(URLQueryItem(name: "li", value: lineItemsString))
         }
@@ -94,6 +89,40 @@ final class MlinkNetworkManager {
         }
     }
     
+    private var configureSessionId: String {
+        if let sessionParamater = UserDefaults.standard.dictionary(forKey: "session_parameter") {
+            if let createdTime = sessionParamater["created_time"] as? Double {
+                let now = Date.now
+                let createdDate = Date(timeIntervalSinceReferenceDate: createdTime)
+                let diffMinute = getMinutesDifferenceFromTwoDates(start: createdDate, end: now)
+                if diffMinute > 30 { /// Session Id Renewed in Every 30 Minutes.
+                    return createUUID()
+                }
+            }
+            
+            guard let sessionId = sessionParamater["session_id"] as? String else {
+                return createUUID()
+            }
+            return sessionId
+        }
+        return createUUID()
+    }
+    
+    private func createUUID() -> String {
+        var parameters: [String:Any] = [:]
+        let newSessionId = UUID().uuidString
+        parameters["session_id"] = newSessionId
+        parameters["created_time"] = Date.now.timeIntervalSinceReferenceDate
+        UserDefaults.standard.setValue(parameters, forKey: "session_parameter")
+        return newSessionId
+    }
+    
+    private func getMinutesDifferenceFromTwoDates(start: Date, end: Date) -> Int {
+        let diff = Int(end.timeIntervalSince1970 - start.timeIntervalSince1970)
+        let hours = diff / 3600
+        let minutes = (diff - hours * 3600) / 60
+        return minutes
+    }
 }
 
 

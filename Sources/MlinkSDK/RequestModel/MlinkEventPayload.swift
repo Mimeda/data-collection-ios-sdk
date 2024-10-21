@@ -1,27 +1,22 @@
-//
-//  File.swift
-//  
-//
-//  Created by Sezgin Çiftci on 15.08.2024.
-//
+
 
 import Foundation
 
 public struct MlinkEventPayload {
     
-    public init(userId: Int, lineItems: [Int], products: [MlinkEventProduct]?) {
+    public init(userId: Int, adIDList: [Int], products: [MlinkEventProduct]?) {
         self.userId = userId
-        self.lineItems = lineItems
+        self.adIDList = adIDList
         self.products = products
     }
     
     let userId: Int?
-    let lineItems: [Int]?
+    let adIDList: [Int]?
     let products: [MlinkEventProduct]?
     
     enum CodingKeys: String, CodingKey {
         case userId = "UserID"
-        case lineItems = "LineItems"
+        case adIDList = "AddIDList"
         case products = "Products"
     }
 }
