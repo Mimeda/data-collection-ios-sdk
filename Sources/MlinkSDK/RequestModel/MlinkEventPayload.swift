@@ -13,12 +13,6 @@ public struct MlinkEventPayload {
     let userId: Int?
     let adIDList: [Int]?
     let products: [MlinkEventProduct]?
-    
-    enum CodingKeys: String, CodingKey {
-        case userId = "UserID"
-        case adIDList = "AddIDList"
-        case products = "Products"
-    }
 }
 
 public struct MlinkEventProduct {
@@ -30,11 +24,5 @@ public struct MlinkEventProduct {
         self.barcode = barcode
         self.quantity = quantity
         self.price = price
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case barcode = "Barcode"
-        case quantity = "Quantity"
-        case price = "Price"
     }
 }

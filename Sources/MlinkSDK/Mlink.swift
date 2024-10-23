@@ -2,7 +2,7 @@
 
 import Foundation
 
-final public class MlinkInitializer {
+final public class Mlink {
     static var appId: Int!
     static var publisher: String!
     static var isLogEnabled: Bool!
@@ -17,9 +17,9 @@ final public class MlinkInitializer {
     ///   - publisher: obligatory publisher pass during initialize
     ///   - isLogEnabled: optional isLogEnabled pass during initialize, default true
     static public func initialize(appId: Int, publisher: String, isLogEnabled: Bool = true) {
-        MlinkInitializer.appId = appId
-        MlinkInitializer.publisher = publisher
-        MlinkInitializer.isLogEnabled = isLogEnabled
-        MlinkInitializer.isInitialized = true
+        Mlink.appId = appId
+        Mlink.publisher = publisher
+        Mlink.isLogEnabled = isLogEnabled
+        Mlink.isInitialized = true
     }
 }

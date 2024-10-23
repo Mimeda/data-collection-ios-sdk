@@ -6,8 +6,8 @@ final class MlinkNetworkManager {
     
     func baseRequest(with payload: MlinkEventPayload, en: String, ep: String) {
         
-        guard MlinkInitializer.isInitialized else {
-            print("Mlink Event Error: You need to initialize SDK first.")
+        guard Mlink.isInitialized else {
+            print("Mlink Error: You need to initialize SDK first.")
             return
         }
         
@@ -15,27 +15,36 @@ final class MlinkNetworkManager {
             return
         }
         
-        if MlinkInitializer.isLogEnabled {
-            print("Mlink Request: \(url.absoluteString)")
-        }
+//        if Mlink.isLogEnabled {
+//            print("Mlink: \(en) \(ep)")
+//        }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error {
-                self.logger(input: error.localizedDescription, isSuccess: false)
+//                self.logger(input: error.localizedDescription, isSuccess: false)
                 return
             }
             
             guard let response = response as? HTTPURLResponse else {
-                self.logger(input: "", isSuccess: false)
+//                self.logger(input: "", isSuccess: false)
+                if Mlink.isLogEnabled {
+                    print("Mlink: Error - \(en).\(ep)")
+                }
                 return
             }
             
             guard Range(200...300).contains(response.statusCode) else {
-                self.logger(input: response.statusCode, isSuccess: false)
+//                self.logger(input: response.statusCode, isSuccess: false)
+                if Mlink.isLogEnabled {
+                    print("Mlink: Error - \(en).\(ep)")
+                }
                 return
             }
+            if Mlink.isLogEnabled {
+                print("Mlink: Success - \(en).\(ep)")
+            }
             
-            self.logger(input: response.statusCode, isSuccess: true)
+//            self.logger(input: response.statusCode, isSuccess: true)
         }
         
         task.resume()
@@ -47,8 +56,8 @@ final class MlinkNetworkManager {
         
         // Query parameters
         var queryItems: [URLQueryItem] = [
-            URLQueryItem(name: "v", value: MlinkInitializer.version),
-            URLQueryItem(name: "pub", value: MlinkInitializer.publisher),
+            URLQueryItem(name: "v", value: Mlink.version),
+            URLQueryItem(name: "pub", value: Mlink.publisher),
             URLQueryItem(name: "t", value: "\(Int(Date.timeIntervalSinceReferenceDate))"),
             URLQueryItem(name: "d", value: UIDevice.current.identifierForVendor?.uuidString),
             URLQueryItem(name: "aid", value: String(payload.userId ?? 0)),
@@ -84,7 +93,7 @@ final class MlinkNetworkManager {
     }
     
     private func logger(input: some Equatable, isSuccess: Bool) {
-        if MlinkInitializer.isLogEnabled {
+        if Mlink.isLogEnabled {
             print("Mlink Event \(isSuccess ? "Success" : "Error"): \(input)")
         }
     }
