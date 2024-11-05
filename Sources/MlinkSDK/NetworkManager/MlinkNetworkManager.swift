@@ -7,7 +7,7 @@ final class MlinkNetworkManager {
     func baseRequest(with payload: MlinkEventPayload, en: String, ep: String) {
         
         guard Mlink.isInitialized else {
-            print("Mlink Error: You need to initialize SDK first.")
+            print("Mlink: You need to initialize SDK first.")
             return
         }
         
@@ -15,18 +15,15 @@ final class MlinkNetworkManager {
             return
         }
         
-//        if Mlink.isLogEnabled {
-//            print("Mlink: \(en) \(ep)")
-//        }
-        
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error {
-//                self.logger(input: error.localizedDescription, isSuccess: false)
+            if let _ = error {
+                if Mlink.isLogEnabled {
+                    print("Mlink: Error - \(en).\(ep)")
+                }
                 return
             }
             
             guard let response = response as? HTTPURLResponse else {
-//                self.logger(input: "", isSuccess: false)
                 if Mlink.isLogEnabled {
                     print("Mlink: Error - \(en).\(ep)")
                 }
@@ -34,7 +31,6 @@ final class MlinkNetworkManager {
             }
             
             guard Range(200...300).contains(response.statusCode) else {
-//                self.logger(input: response.statusCode, isSuccess: false)
                 if Mlink.isLogEnabled {
                     print("Mlink: Error - \(en).\(ep)")
                 }
@@ -44,7 +40,6 @@ final class MlinkNetworkManager {
                 print("Mlink: Success - \(en).\(ep)")
             }
             
-//            self.logger(input: response.statusCode, isSuccess: true)
         }
         
         task.resume()
@@ -52,9 +47,8 @@ final class MlinkNetworkManager {
     
     private func configureURL(with payload: MlinkEventPayload, en: String, ep: String) -> URL? {
         
-        let baseURL = "https://collector.avvamobiledemo.com/im.gif" //"https://s.mlink.com.tr/im.gif?"
+        let baseURL = "https://collector.avvamobiledemo.com/im.gif"
         
-        // Query parameters
         var queryItems: [URLQueryItem] = [
             URLQueryItem(name: "v", value: Mlink.version),
             URLQueryItem(name: "pub", value: Mlink.publisher),
@@ -69,13 +63,6 @@ final class MlinkNetworkManager {
             URLQueryItem(name: "ep", value: ep)
         ]
         
-        // Add line items if available
-        if let lineItems = payload.adIDList {
-            let lineItemsString = lineItems.map { "\($0)" }.joined(separator: ",")
-            queryItems.append(URLQueryItem(name: "li", value: lineItemsString))
-        }
-        
-        // Add products if available
         if let products = payload.products {
             let mappedProducts = products.map { product in
                 "\(product.barcode ?? 0):\(product.quantity ?? 0):\(product.price ?? 0)"
@@ -84,11 +71,25 @@ final class MlinkNetworkManager {
             queryItems.append(URLQueryItem(name: "pl", value: "\(joinedProducts);"))
         }
         
-        // Create the URL components
+        if let categoryId = payload.categoryId {
+            queryItems.append(URLQueryItem(name: "ct", value: categoryId))
+        }
+        
+        if let keyword = payload.keyword {
+            queryItems.append(URLQueryItem(name: "kw", value: keyword))
+        }
+        
+        if let transactionId = payload.transactionId {
+            queryItems.append(URLQueryItem(name: "trans", value: String(transactionId)))
+        }
+        
+        if let totalRowCount = payload.totalRowCount {
+            queryItems.append(URLQueryItem(name: "trc", value: String(totalRowCount)))
+        }
+        
         var urlComponents = URLComponents(string: baseURL)
         urlComponents?.queryItems = queryItems
                 
-        // Return the full URL
         return urlComponents?.url
     }
     
@@ -104,7 +105,7 @@ final class MlinkNetworkManager {
                 let now = Date.now
                 let createdDate = Date(timeIntervalSinceReferenceDate: createdTime)
                 let diffMinute = getMinutesDifferenceFromTwoDates(start: createdDate, end: now)
-                if diffMinute > 30 { /// Session Id Renewed in Every 30 Minutes.
+                if diffMinute > 30 {
                     return createUUID()
                 }
             }
@@ -133,5 +134,3 @@ final class MlinkNetworkManager {
         return minutes
     }
 }
-
-

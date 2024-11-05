@@ -4,14 +4,25 @@ import Foundation
 
 public struct MlinkEventPayload {
     
-    public init(userId: Int, adIDList: [Int], products: [MlinkEventProduct]?) {
+    public init(userId: Int? = nil,
+                categoryId: String? = nil,
+                keyword: String? = nil,
+                totalRowCount: Int? = nil,
+                transactionId: Int? = nil,
+                products: [MlinkEventProduct]? = nil) {
         self.userId = userId
-        self.adIDList = adIDList
+        self.categoryId = categoryId
+        self.keyword = keyword
+        self.totalRowCount = totalRowCount
+        self.transactionId = transactionId
         self.products = products
     }
     
     let userId: Int?
-    let adIDList: [Int]?
+    let categoryId: String?
+    let keyword: String?
+    let totalRowCount: Int?
+    let transactionId: Int?
     let products: [MlinkEventProduct]?
 }
 

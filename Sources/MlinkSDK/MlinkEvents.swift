@@ -1,5 +1,3 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
 
 import Foundation
 
@@ -21,6 +19,9 @@ public class MlinkEvents {
     
     public class Listing {
         static public func view(with payload: MlinkEventPayload) {
+            if payload.categoryId == nil {
+                print("Mlink: You Should Send CategoryId")
+            }
             MlinkNetworkManager().baseRequest(with: payload, en: "listing", ep: "view")
         }
         
@@ -28,18 +29,30 @@ public class MlinkEvents {
             if payload.products == nil {
                 print("Mlink: You Should Send Products")
             }
+            if payload.categoryId == nil {
+                print("Mlink: You Should Send CategoryId")
+            }
             MlinkNetworkManager().baseRequest(with: payload, en: "listing", ep: "addtocart")
         }
     }
     
     public class Search {
         static public func view(with payload: MlinkEventPayload) {
+            if payload.keyword == nil || payload.totalRowCount == nil {
+                print("Mlink: You Should Send Keyword")
+            }
+            if payload.totalRowCount == nil {
+                print("Mlink: You Should Send Total Row Count")
+            }
             MlinkNetworkManager().baseRequest(with: payload, en: "search", ep: "view")
         }
         
         static public func addToCart(with payload: MlinkEventPayload) {
             if payload.products == nil {
                 print("Mlink: You Should Send Products")
+            }
+            if payload.keyword == nil {
+                print("Mlink: You Should Send Keyword")
             }
             MlinkNetworkManager().baseRequest(with: payload, en: "search", ep: "addtocart")
         }
@@ -68,6 +81,9 @@ public class MlinkEvents {
         static public func success(with payload: MlinkEventPayload) {
             if payload.products == nil {
                 print("Mlink: You Should Send Products")
+            }
+            if payload.transactionId == nil {
+                print("Mlink: You Should Send Transaction Id")
             }
             MlinkNetworkManager().baseRequest(with: payload, en: "purchase", ep: "success")
         }
