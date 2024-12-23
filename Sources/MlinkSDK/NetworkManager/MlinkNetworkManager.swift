@@ -215,45 +215,5 @@ final class MlinkNetworkManager {
                 
         return urlComponents?.url
     }
-    
-    private func logger2(input: some Equatable, isSuccess: Bool) {
-        if Mlink.isLogEnabled {
-            print("Mlink Event \(isSuccess ? "Success" : "Error"): \(input)")
-        }
-    }
-    
-    private var configureSessionId2: String {
-        if let sessionParamater = UserDefaults.standard.dictionary(forKey: "session_parameter") {
-            if let createdTime = sessionParamater["created_time"] as? Double {
-                let now = Date.now
-                let createdDate = Date(timeIntervalSinceReferenceDate: createdTime)
-                let diffMinute = getMinutesDifferenceFromTwoDates(start: createdDate, end: now)
-                if diffMinute > 30 {
-                    return createUUID()
-                }
-            }
-            
-            guard let sessionId = sessionParamater["session_id"] as? String else {
-                return createUUID()
-            }
-            return sessionId
-        }
-        return createUUID()
-    }
-    
-    private func createUUID2() -> String {
-        var parameters: [String:Any] = [:]
-        let newSessionId = UUID().uuidString
-        parameters["session_id"] = newSessionId
-        parameters["created_time"] = Date.now.timeIntervalSinceReferenceDate
-        UserDefaults.standard.setValue(parameters, forKey: "session_parameter")
-        return newSessionId
-    }
-    
-    private func getMinutesDifferenceFromTwoDates2(start: Date, end: Date) -> Int {
-        let diff = Int(end.timeIntervalSince1970 - start.timeIntervalSince1970)
-        let hours = diff / 3600
-        let minutes = (diff - hours * 3600) / 60
-        return minutes
-    }
+
 }
