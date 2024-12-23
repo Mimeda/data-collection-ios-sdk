@@ -90,3 +90,17 @@ public class MlinkEvents {
     }
     
 }
+
+public class MlinkAds {
+    
+    static public func impression(with payload: MlinkAdPayload) {
+        MlinkNetworkManager().baseRequest(with: payload, en: "Ad Impression", state: .impression)
+        }
+             
+    static public func click(with payload: MlinkAdPayload) {
+        
+        MlinkNetworkManager().baseRequest(with: payload, en: "Ad Click", state: .click)
+        
+    }
+    
+}

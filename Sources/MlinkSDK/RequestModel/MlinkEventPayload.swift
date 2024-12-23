@@ -37,3 +37,21 @@ public struct MlinkEventProduct {
         self.price = price
     }
 }
+
+// ----------
+
+public struct MlinkAdPayload {
+
+       let lineItemId: Int?
+       let creativeId: Int?
+       let adUnit: String?
+       let keyword: String?
+    
+    public init(lineItemId: Int?, creativeId: Int?, adUnit: String?, keyword: String?) {
+        self.lineItemId = lineItemId
+        self.creativeId = creativeId
+        self.adUnit = adUnit
+        self.keyword = keyword
+    }
+   
+}

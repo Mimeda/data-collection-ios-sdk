@@ -2,6 +2,10 @@
 
 import UIKit
 
+enum NetworkEventState {
+    case click
+    case impression
+}
 final class MlinkNetworkManager {
     
     func baseRequest(with payload: MlinkEventPayload, en: String, ep: String) {
@@ -47,7 +51,7 @@ final class MlinkNetworkManager {
     
     private func configureURL(with payload: MlinkEventPayload, en: String, ep: String) -> URL? {
         
-        let baseURL = "https://collector.avvamobiledemo.com/im.gif"
+        let baseURL = "https://bidding-eventcollector.azurewebsites.net"
         
         var queryItems: [URLQueryItem] = [
             URLQueryItem(name: "v", value: Mlink.version),
@@ -60,7 +64,9 @@ final class MlinkNetworkManager {
             URLQueryItem(name: "p", value: "apple-ios-\(UIDevice.current.systemVersion)"),
             URLQueryItem(name: "s", value: configureSessionId),
             URLQueryItem(name: "en", value: en),
-            URLQueryItem(name: "ep", value: ep)
+            URLQueryItem(name: "ep", value: ep),
+            URLQueryItem(name: "li", value: "0"),
+            URLQueryItem(name: "appid", value: "\(Mlink.appId!)"),
         ]
         
         if let products = payload.products {
@@ -88,6 +94,7 @@ final class MlinkNetworkManager {
         }
         
         var urlComponents = URLComponents(string: baseURL)
+        urlComponents?.path = "/event"
         urlComponents?.queryItems = queryItems
                 
         return urlComponents?.url
@@ -128,6 +135,122 @@ final class MlinkNetworkManager {
     }
     
     private func getMinutesDifferenceFromTwoDates(start: Date, end: Date) -> Int {
+        let diff = Int(end.timeIntervalSince1970 - start.timeIntervalSince1970)
+        let hours = diff / 3600
+        let minutes = (diff - hours * 3600) / 60
+        return minutes
+    }
+    
+    
+    // -------- ------- ------- ------- ------- ------- ------- >>> ------- ------- ------- -------
+    
+    
+    func baseRequest(with payload: MlinkAdPayload, en: String, state: NetworkEventState) {
+        
+        guard Mlink.isInitialized else {
+            print("Mlink: You need to initialize SDK first.")
+            return
+        }
+        
+        
+        guard let url = configureURL(with: payload, en: en, state: state) else {
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let _ = error {
+                if Mlink.isLogEnabled {
+                    print("Mlink: Error - \(en)")
+                }
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                if Mlink.isLogEnabled {
+                    print("Mlink: Error - \(en)")
+                }
+                return
+            }
+            
+            guard Range(200...300).contains(response.statusCode) else {
+                
+                if Mlink.isLogEnabled {
+                    print("Mlink: Error - \(en)")
+                }
+                return
+            }
+            if Mlink.isLogEnabled {
+                print("Mlink: Success - \(en)")
+            }
+            
+        }
+        
+        task.resume()
+    }
+    
+    private func configureURL(with payload: MlinkAdPayload, en: String, state: NetworkEventState) -> URL? {
+        
+        let baseURL = "https://bidding-eventcollector.azurewebsites.net"
+        
+        var queryItems: [URLQueryItem] = [
+            
+            URLQueryItem(name: "lineItemId", value: "\(payload.lineItemId!)"),
+            URLQueryItem(name: "creativeId", value: "\(payload.creativeId!)"),
+            URLQueryItem(name: "adUnit", value: "\(payload.adUnit!)"),
+            URLQueryItem(name: "keyword", value: "\(payload.keyword!)"),
+            
+         
+        ]
+        
+        var urlComponents = URLComponents(string: baseURL)
+        switch state {
+        case .click:
+            urlComponents?.path = "/click"
+        case .impression:
+            urlComponents?.path = "/impression"
+           
+        }
+       
+        urlComponents?.queryItems = queryItems
+                
+        return urlComponents?.url
+    }
+    
+    private func logger2(input: some Equatable, isSuccess: Bool) {
+        if Mlink.isLogEnabled {
+            print("Mlink Event \(isSuccess ? "Success" : "Error"): \(input)")
+        }
+    }
+    
+    private var configureSessionId2: String {
+        if let sessionParamater = UserDefaults.standard.dictionary(forKey: "session_parameter") {
+            if let createdTime = sessionParamater["created_time"] as? Double {
+                let now = Date.now
+                let createdDate = Date(timeIntervalSinceReferenceDate: createdTime)
+                let diffMinute = getMinutesDifferenceFromTwoDates(start: createdDate, end: now)
+                if diffMinute > 30 {
+                    return createUUID()
+                }
+            }
+            
+            guard let sessionId = sessionParamater["session_id"] as? String else {
+                return createUUID()
+            }
+            return sessionId
+        }
+        return createUUID()
+    }
+    
+    private func createUUID2() -> String {
+        var parameters: [String:Any] = [:]
+        let newSessionId = UUID().uuidString
+        parameters["session_id"] = newSessionId
+        parameters["created_time"] = Date.now.timeIntervalSinceReferenceDate
+        UserDefaults.standard.setValue(parameters, forKey: "session_parameter")
+        return newSessionId
+    }
+    
+    private func getMinutesDifferenceFromTwoDates2(start: Date, end: Date) -> Int {
         let diff = Int(end.timeIntervalSince1970 - start.timeIntervalSince1970)
         let hours = diff / 3600
         let minutes = (diff - hours * 3600) / 60
