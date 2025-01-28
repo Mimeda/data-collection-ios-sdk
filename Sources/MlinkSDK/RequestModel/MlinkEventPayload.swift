@@ -1,8 +1,14 @@
 
-
 import Foundation
 
-public struct MlinkEventPayload {
+public struct MlinkEventPayload: ServiceModelProvidable {
+    
+    var userId: Int?
+    let categoryId: String?
+    let keyword: String?
+    let totalRowCount: Int?
+    let transactionId: Int?
+    let products: [MlinkEventProduct]?
     
     public init(userId: Int? = nil,
                 categoryId: String? = nil,
@@ -18,12 +24,6 @@ public struct MlinkEventPayload {
         self.products = products
     }
     
-    let userId: Int?
-    let categoryId: String?
-    let keyword: String?
-    let totalRowCount: Int?
-    let transactionId: Int?
-    let products: [MlinkEventProduct]?
 }
 
 public struct MlinkEventProduct {
@@ -36,22 +36,4 @@ public struct MlinkEventProduct {
         self.quantity = quantity
         self.price = price
     }
-}
-
-// ----------
-
-public struct MlinkAdPayload {
-
-       let lineItemId: Int?
-       let creativeId: Int?
-       let adUnit: String?
-       let keyword: String?
-    
-    public init(lineItemId: Int?, creativeId: Int?, adUnit: String?, keyword: String?) {
-        self.lineItemId = lineItemId
-        self.creativeId = creativeId
-        self.adUnit = adUnit
-        self.keyword = keyword
-    }
-   
 }

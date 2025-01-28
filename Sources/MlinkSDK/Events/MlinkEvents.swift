@@ -1,19 +1,18 @@
 
 import Foundation
 
-
 public class MlinkEvents {
     
     public class Home {
         static public func view(with payload: MlinkEventPayload) {
-            MlinkNetworkManager().baseRequest(with: payload, en: "home", ep: "view")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "home", ep: "view")
         }
              
         static public func addToCart(with payload: MlinkEventPayload) {
             if payload.products == nil {
                 print("Mlink: You Should Send Products")
             }
-            MlinkNetworkManager().baseRequest(with: payload, en: "home", ep: "addtocart")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "home", ep: "addtocart")
         }
     }
     
@@ -22,7 +21,7 @@ public class MlinkEvents {
             if payload.categoryId == nil {
                 print("Mlink: You Should Send CategoryId")
             }
-            MlinkNetworkManager().baseRequest(with: payload, en: "listing", ep: "view")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "listing", ep: "view")
         }
         
         static public func addToCart(with payload: MlinkEventPayload) {
@@ -32,7 +31,7 @@ public class MlinkEvents {
             if payload.categoryId == nil {
                 print("Mlink: You Should Send CategoryId")
             }
-            MlinkNetworkManager().baseRequest(with: payload, en: "listing", ep: "addtocart")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "listing", ep: "addtocart")
         }
     }
     
@@ -44,7 +43,7 @@ public class MlinkEvents {
             if payload.totalRowCount == nil {
                 print("Mlink: You Should Send Total Row Count")
             }
-            MlinkNetworkManager().baseRequest(with: payload, en: "search", ep: "view")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "search", ep: "view")
         }
         
         static public func addToCart(with payload: MlinkEventPayload) {
@@ -54,26 +53,26 @@ public class MlinkEvents {
             if payload.keyword == nil {
                 print("Mlink: You Should Send Keyword")
             }
-            MlinkNetworkManager().baseRequest(with: payload, en: "search", ep: "addtocart")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "search", ep: "addtocart")
         }
     }
     
     public class ProductDetails {
         static public func view(with payload: MlinkEventPayload) {
-            MlinkNetworkManager().baseRequest(with: payload, en: "productdetails", ep: "view")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "productdetails", ep: "view")
         }
 
         static public func addToCart(with payload: MlinkEventPayload) {
             if payload.products == nil {
                 print("Mlink: You Should Send Products")
             }
-            MlinkNetworkManager().baseRequest(with: payload, en: "productdetails", ep: "addtocart")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "productdetails", ep: "addtocart")
         }
     }
    
     public class Cart {
         static public func view(with payload: MlinkEventPayload) {
-            MlinkNetworkManager().baseRequest(with: payload, en: "cart", ep: "view")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "cart", ep: "view")
         }
     }
     
@@ -85,7 +84,7 @@ public class MlinkEvents {
             if payload.transactionId == nil {
                 print("Mlink: You Should Send Transaction Id")
             }
-            MlinkNetworkManager().baseRequest(with: payload, en: "purchase", ep: "success")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "purchase", ep: "success")
         }
     }
     
@@ -94,12 +93,12 @@ public class MlinkEvents {
 public class MlinkAds {
     
     static public func impression(with payload: MlinkAdPayload) {
-        MlinkNetworkManager().baseRequest(with: payload, en: "Ad Impression", state: .impression)
+        MlinkAdNetworkManager().baseRequest(with: payload, en: "Ad Impression", state: .impression)
         }
              
     static public func click(with payload: MlinkAdPayload) {
         
-        MlinkNetworkManager().baseRequest(with: payload, en: "Ad Click", state: .click)
+        MlinkAdNetworkManager().baseRequest(with: payload, en: "Ad Click", state: .click)
         
     }
     
