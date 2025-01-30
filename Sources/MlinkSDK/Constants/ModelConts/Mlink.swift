@@ -3,7 +3,7 @@
 import Foundation
 
 final public class Mlink {
-    static var appId: Int!
+    static var appId: String!
     static var publisher: String!
     static var isLogEnabled: Bool!
     
@@ -16,7 +16,7 @@ final public class Mlink {
     ///   - appId: obligatory appId pass during initialize
     ///   - publisher: obligatory publisher pass during initialize
     ///   - isLogEnabled: optional isLogEnabled pass during initialize, default true
-    static public func initialize(appId: Int, publisher: String, isLogEnabled: Bool = true) {
+    static public func initialize(appId: String, publisher: String, isLogEnabled: Bool = true) {
         Mlink.appId = appId
         Mlink.publisher = publisher
         Mlink.isLogEnabled = isLogEnabled

@@ -56,7 +56,7 @@ final class MlinkEventNetworkManager: IMlinkNetwork{
         var queryItemDict: [URLConstants.PublisherEventConstants: String?] = [
             .version:  Mlink.version,
             .publisher: Mlink.publisher,
-            .timeStamp: "\(Int(Date.timeIntervalSinceReferenceDate))",
+            .timeStamp: "\(Int64(Date.timeIntervalSinceReferenceDate))",
             .deviceId:  UIDevice.current.identifierForVendor?.uuidString,
             .anonId:  UUID().uuidString,
             .userId: String(payload.userId ?? 0),

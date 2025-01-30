@@ -39,6 +39,8 @@ final class URLConstants {
         case anonymousId       = "aid"
         case timestamp         = "t"
         case sessionId         = "s"
+        case productSku        = "psku"
+        case payload           = "pyl"
         // Model Constants
         case userId            = "uid"
     }

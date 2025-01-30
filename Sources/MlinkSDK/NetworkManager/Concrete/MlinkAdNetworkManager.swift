@@ -55,15 +55,17 @@ final class MlinkAdNetworkManager: IMlinkNetwork {
     private func configureURL(with payload: MlinkAdPayload, en: String, state: NetworkEventState) -> URL? {
         
         let baseURL = BaseURL.adPayLoad.baseURL
-        
-        var queryItemDict: [URLConstants.AdEventConstants: String?] = [
+       
+        let queryItemDict: [URLConstants.AdEventConstants: String?] = [
             .lineItemId: "\(payload.lineItemId!)",
             .creativeId: "\(payload.creativeId!)",
             .adUnit: "\(payload.adUnit!)",
             .keyword: "\(payload.keyword!)",
+            .productSku: payload.productSku,
+            .payload: payload.payload,
             .anonymousId: UUID().uuidString,
             .userId: String(payload.userId ?? 0),
-            .timestamp: "\(Int(Date.timeIntervalSinceReferenceDate))",
+            .timestamp: "\(Int64(Date.timeIntervalSinceReferenceDate))",
             .sessionId: configureSessionId
     
         ]
