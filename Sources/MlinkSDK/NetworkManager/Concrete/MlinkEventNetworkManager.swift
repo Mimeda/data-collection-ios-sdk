@@ -52,7 +52,8 @@ final class MlinkEventNetworkManager: IMlinkNetwork{
      func configureURL(with payload: MlinkEventPayload, en: String, ep: String) -> URL? {
         
         let baseURL = BaseURL.eventPayLoad.baseURL
-    
+        
+         let lineItemIds =  payload.lineItemIds?.map(String.init).joined(separator: ",") ?? "0"
         var queryItemDict: [URLConstants.PublisherEventConstants: String?] = [
             .version:  Mlink.version,
             .publisher: Mlink.publisher,
@@ -65,7 +66,7 @@ final class MlinkEventNetworkManager: IMlinkNetwork{
             .sessionId: configureSessionId,
             .eventName: en,
             .eventParameter: ep,
-            .lineItemIds: "0",
+            .lineItemIds: lineItemIds,
             .applicationId: "\(Mlink.appId!)"
         ]
         
@@ -96,7 +97,7 @@ final class MlinkEventNetworkManager: IMlinkNetwork{
             value.map { URLQueryItem(name: key.rawValue, value: $0) }
         }
         var urlComponents = URLComponents(string: baseURL)
-        urlComponents?.path = "/event"
+        urlComponents?.path = "/events"
         urlComponents?.queryItems = queryItems
                 
         return urlComponents?.url

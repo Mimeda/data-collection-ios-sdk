@@ -9,14 +9,14 @@ public struct MlinkEventPayload: ServiceModelProvidable {
     let totalRowCount: Int?
     let transactionId: String?
     let products: [MlinkEventProduct]?
-    let lineItemIds: String?
+    let lineItemIds: [Int]?
     public init(userId: Int? = nil,
                 categoryId: String? = nil,
                 keyword: String? = nil,
                 totalRowCount: Int? = nil,
                 transactionId: String? = nil,
                 products: [MlinkEventProduct]? = nil,
-                lineItemIds: String? = nil
+                lineItemIds: [Int]? = nil
     ) {
         self.userId = userId
         self.categoryId = categoryId

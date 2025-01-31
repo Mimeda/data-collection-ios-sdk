@@ -78,9 +78,9 @@ final class MlinkAdNetworkManager: IMlinkNetwork {
         
         switch state {
         case .click:
-            urlComponents?.path = "/click"
+            urlComponents?.path = "/clicks"
         case .impression:
-            urlComponents?.path = "/impression"
+            urlComponents?.path = "/impressions"
            
         }
         urlComponents?.queryItems = queryItems
