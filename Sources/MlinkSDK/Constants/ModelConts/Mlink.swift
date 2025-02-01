@@ -7,7 +7,7 @@ final public class Mlink {
     static var publisher: String!
     static var isLogEnabled: Bool!
     
-    static var version: String = "1.0.0.2"
+    static var version: String = "1.0.3"
     static var isInitialized: Bool = false
     
     
