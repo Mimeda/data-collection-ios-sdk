@@ -14,7 +14,7 @@ public struct MlinkAdPayload: ServiceModelProvidable, Codable{
     var userId: Int?
     let payload: String?
     
-    public init(lineItemId: Int?, creativeId: Int?, adUnit: String?, keyword: String?, userId: Int?, productSku: String?, payload: String?) {
+    public init(lineItemId: Int?, creativeId: Int?, adUnit: String?, keyword: String?, userId: Int? = nil, productSku: String?, payload: String?) {
         self.userId = userId
         self.lineItemId = lineItemId
         self.creativeId = creativeId
