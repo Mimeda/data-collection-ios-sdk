@@ -13,8 +13,9 @@ public struct MlinkAdPayload: ServiceModelProvidable, Codable{
     let productSku: String?
     var userId: Int?
     let payload: String?
-    
-    public init(lineItemId: Int?, creativeId: Int?, adUnit: String?, keyword: String?, userId: Int? = nil, productSku: String?, payload: String?) {
+    let website: String?
+    let loyaltyCard: String?
+    public init(lineItemId: Int?, creativeId: Int?, adUnit: String?, keyword: String?, userId: Int? = nil, productSku: String?, payload: String?, website: String? = nil, loyaltyCard: String? = nil) {
         self.userId = userId
         self.lineItemId = lineItemId
         self.creativeId = creativeId
@@ -22,6 +23,8 @@ public struct MlinkAdPayload: ServiceModelProvidable, Codable{
         self.keyword = keyword
         self.productSku = productSku
         self.payload = payload
+        self.website = website
+        self.loyaltyCard = loyaltyCard
     }
    
 }

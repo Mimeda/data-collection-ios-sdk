@@ -66,7 +66,9 @@ final class MlinkAdNetworkManager: IMlinkNetwork {
             .anonymousId: UUID().uuidString,
             .userId: String(payload.userId ?? 0),
             .timestamp: "\(Int64(Date.timeIntervalSinceReferenceDate))",
-            .sessionId: configureSessionId
+            .sessionId: configureSessionId,
+            .website: payload.website,
+            .loyaltyCard: payload.loyaltyCard
     
         ]
         

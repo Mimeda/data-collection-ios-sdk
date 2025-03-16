@@ -67,7 +67,9 @@ final class MlinkEventNetworkManager: IMlinkNetwork{
             .eventName: en,
             .eventParameter: ep,
             .lineItemIds: lineItemIds,
-            .applicationId: "\(Mlink.appId!)"
+            .applicationId: "\(Mlink.appId!)",
+            .website: payload.website,
+            .loyaltyCard: payload.loyaltyCard
         ]
         
         if let products = payload.products {

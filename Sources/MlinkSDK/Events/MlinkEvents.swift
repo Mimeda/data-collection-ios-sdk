@@ -5,14 +5,18 @@ public class MlinkEvents {
     
     public class Home {
         static public func view(with payload: MlinkEventPayload) {
-            MlinkEventNetworkManager().baseRequest(with: payload, en: "home", ep: "view")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "Home", ep: "View")
         }
              
         static public func addToCart(with payload: MlinkEventPayload) {
             if payload.products == nil {
                 print("Mlink: You Should Send Products")
             }
-            MlinkEventNetworkManager().baseRequest(with: payload, en: "home", ep: "addtocart")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "Home", ep: "AddToCart")
+        }
+        
+        static public func addToFavorites(with payload: MlinkEventPayload) {
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "Home", ep: "AddToFavorites")
         }
     }
     
@@ -21,7 +25,7 @@ public class MlinkEvents {
             if payload.categoryId == nil {
                 print("Mlink: You Should Send CategoryId")
             }
-            MlinkEventNetworkManager().baseRequest(with: payload, en: "listing", ep: "view")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "Listing", ep: "View")
         }
         
         static public func addToCart(with payload: MlinkEventPayload) {
@@ -31,7 +35,11 @@ public class MlinkEvents {
             if payload.categoryId == nil {
                 print("Mlink: You Should Send CategoryId")
             }
-            MlinkEventNetworkManager().baseRequest(with: payload, en: "listing", ep: "addtocart")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "Listing", ep: "AddToCart")
+        }
+        
+        static public func addToFavorites(with payload: MlinkEventPayload) {
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "Listing", ep: "AddToFavorites")
         }
     }
     
@@ -43,7 +51,7 @@ public class MlinkEvents {
             if payload.totalRowCount == nil {
                 print("Mlink: You Should Send Total Row Count")
             }
-            MlinkEventNetworkManager().baseRequest(with: payload, en: "search", ep: "view")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "Search", ep: "View")
         }
         
         static public func addToCart(with payload: MlinkEventPayload) {
@@ -53,26 +61,34 @@ public class MlinkEvents {
             if payload.keyword == nil {
                 print("Mlink: You Should Send Keyword")
             }
-            MlinkEventNetworkManager().baseRequest(with: payload, en: "search", ep: "addtocart")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "Search", ep: "AddToCart")
+        }
+        
+        static public func addToFavorites(with payload: MlinkEventPayload) {
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "Search", ep: "AddToFavorites")
         }
     }
     
     public class ProductDetails {
         static public func view(with payload: MlinkEventPayload) {
-            MlinkEventNetworkManager().baseRequest(with: payload, en: "productdetails", ep: "view")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "ProductDetails", ep: "View")
         }
 
         static public func addToCart(with payload: MlinkEventPayload) {
             if payload.products == nil {
                 print("Mlink: You Should Send Products")
             }
-            MlinkEventNetworkManager().baseRequest(with: payload, en: "productdetails", ep: "addtocart")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "ProductDetails", ep: "AddToCart")
+        }
+        
+        static public func addToFavorites(with payload: MlinkEventPayload) {
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "ProductDetails", ep: "AddToFavorites")
         }
     }
    
     public class Cart {
         static public func view(with payload: MlinkEventPayload) {
-            MlinkEventNetworkManager().baseRequest(with: payload, en: "cart", ep: "view")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "Cart", ep: "View")
         }
     }
     
@@ -84,7 +100,7 @@ public class MlinkEvents {
             if payload.transactionId == nil {
                 print("Mlink: You Should Send Transaction Id")
             }
-            MlinkEventNetworkManager().baseRequest(with: payload, en: "purchase", ep: "success")
+            MlinkEventNetworkManager().baseRequest(with: payload, en: "Purchase", ep: "Success")
         }
     }
     

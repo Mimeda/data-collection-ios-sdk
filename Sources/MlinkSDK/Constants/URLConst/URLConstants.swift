@@ -22,6 +22,8 @@ final class URLConstants {
      case eventParameter        = "ep"
      case lineItemIds           = "li"
      case applicationId         = "appid"
+     case website               = "ws"
+     case loyaltyCard           = "lc"
      // Model Constants
      case productList           = "pl"
      case categoryId            = "ct"
@@ -32,16 +34,18 @@ final class URLConstants {
     
     enum AdEventConstants: String {
         // App Constants
-        case lineItemId        = "li"
-        case creativeId        = "c"
-        case adUnit            = "au"
-        case keyword           = "kw"
-        case anonymousId       = "aid"
-        case timestamp         = "t"
-        case sessionId         = "s"
-        case productSku        = "psku"
-        case payload           = "pyl"
+        case lineItemId         = "li"
+        case creativeId         = "c"
+        case adUnit             = "au"
+        case keyword            = "kw"
+        case anonymousId        = "aid"
+        case timestamp          = "t"
+        case sessionId          = "s"
+        case productSku         = "psku"
+        case payload            = "pyl"
+        case website            = "ws"
+        case loyaltyCard        = "lc"
         // Model Constants
-        case userId            = "uid"
+        case userId             = "uid"
     }
 }
