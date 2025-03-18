@@ -68,7 +68,7 @@ final class MlinkEventNetworkManager: IMlinkNetwork{
             .eventParameter: ep,
             .lineItemIds: lineItemIds,
             .applicationId: "\(Mlink.appId!)",
-            .website: payload.website,
+            .website: Mlink.website,
             .loyaltyCard: payload.loyaltyCard
         ]
         

@@ -10,7 +10,6 @@ public struct MlinkEventPayload: ServiceModelProvidable {
     let transactionId: String?
     let products: [MlinkEventProduct]?
     let lineItemIds: [Int]?
-    let website: String?
     let loyaltyCard: String?
     public init(userId: Int? = nil,
                 categoryId: String? = nil,
@@ -29,7 +28,6 @@ public struct MlinkEventPayload: ServiceModelProvidable {
         self.transactionId = transactionId
         self.products = products
         self.lineItemIds = lineItemIds
-        self.website = website
         self.loyaltyCard = loyaltyCard
     }
     
