@@ -67,9 +67,10 @@ final class MlinkAdNetworkManager: IMlinkNetwork {
             .userId: String(payload.userId ?? 0),
             .timestamp: "\(Int64(Date.timeIntervalSinceReferenceDate))",
             .sessionId: configureSessionId,
-            .website: Mlink.website,
-            .loyaltyCard: payload.loyaltyCard
-    
+            .loyaltyCard: payload.loyaltyCard,
+            .application: "\(Mlink.app!)",
+            .operatingSystem: "iOS",
+            .browser: "",
         ]
         
         let queryItems = queryItemDict.compactMap { key, value in

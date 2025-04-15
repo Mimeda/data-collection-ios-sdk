@@ -10,20 +10,19 @@ final class URLConstants {
     enum PublisherEventConstants: String {
      // App Constants
      case version               = "v"
-     case publisher             = "pub"
      case timeStamp             = "t"
      case deviceId              = "d"
      case anonId                = "aid"
      case userId                = "uid"
      case language              = "lng"
-     case platform              = "p"
      case sessionId             = "s"
      case eventName             = "en"
      case eventParameter        = "ep"
      case lineItemIds           = "li"
-     case applicationId         = "appid"
-     case website               = "ws"
+     case application           = "app"
      case loyaltyCard           = "lc"
+     case operatingSystem       = "os"
+     case browser               = "browser"
      // Model Constants
      case productList           = "pl"
      case categoryId            = "ct"
@@ -43,8 +42,10 @@ final class URLConstants {
         case sessionId          = "s"
         case productSku         = "psku"
         case payload            = "pyl"
-        case website            = "ws"
         case loyaltyCard        = "lc"
+        case operatingSystem    = "os"
+        case browser            = "browser"
+        case application        = "app"
         // Model Constants
         case userId             = "uid"
     }

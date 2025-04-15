@@ -11,9 +11,9 @@ enum BaseURL {
     var baseURL: String {
         switch self {
         case .adPayLoad:
-            return "https://bidding-prfmnccollector-stage.azurewebsites.net"
+            return "https://performance.mlink.com.tr"
         case .eventPayLoad:
-            return "https://bidding-eventcollector-stage.azurewebsites.net"
+            return "https://event.mlink.com.tr"
         }
     }
 }

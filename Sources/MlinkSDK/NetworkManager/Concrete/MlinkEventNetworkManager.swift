@@ -56,20 +56,20 @@ final class MlinkEventNetworkManager: IMlinkNetwork{
          let lineItemIds =  payload.lineItemIds?.map(String.init).joined(separator: ",") ?? "0"
         var queryItemDict: [URLConstants.PublisherEventConstants: String?] = [
             .version:  Mlink.version,
-            .publisher: Mlink.publisher,
             .timeStamp: "\(Int64(Date.timeIntervalSinceReferenceDate))",
             .deviceId:  UIDevice.current.identifierForVendor?.uuidString,
             .anonId:  UUID().uuidString,
             .userId: String(payload.userId ?? 0),
             .language: "\(Locale.current.identifier)".replacingOccurrences(of: "_", with: "-"),
-            .platform: "apple-ios-\(UIDevice.current.systemVersion)",
             .sessionId: configureSessionId,
             .eventName: en,
             .eventParameter: ep,
             .lineItemIds: lineItemIds,
-            .applicationId: "\(Mlink.appId!)",
-            .website: Mlink.website,
-            .loyaltyCard: payload.loyaltyCard
+            .application: "\(Mlink.app!)",
+            .loyaltyCard: payload.loyaltyCard,
+            .browser: "",
+            .operatingSystem: "iOS"
+            
         ]
         
         if let products = payload.products {
