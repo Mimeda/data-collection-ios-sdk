@@ -67,7 +67,6 @@ final class MlinkEventNetworkManager: IMlinkNetwork{
             .lineItemIds: lineItemIds,
             .application: "\(Mlink.app!)",
             .loyaltyCard: payload.loyaltyCard,
-            .browser: "",
             .operatingSystem: "iOS"
             
         ]

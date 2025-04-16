@@ -70,7 +70,6 @@ final class MlinkAdNetworkManager: IMlinkNetwork {
             .loyaltyCard: payload.loyaltyCard,
             .application: "\(Mlink.app!)",
             .operatingSystem: "iOS",
-            .browser: "",
         ]
         
         let queryItems = queryItemDict.compactMap { key, value in
