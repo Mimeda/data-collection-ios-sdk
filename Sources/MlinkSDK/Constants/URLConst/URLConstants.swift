@@ -23,6 +23,7 @@ final class URLConstants {
      case loyaltyCard           = "lc"
      case operatingSystem       = "os"
      case browser               = "br"
+     case traceId               = "tid"
      // Model Constants
      case productList           = "pl"
      case categoryId            = "ct"
@@ -46,6 +47,7 @@ final class URLConstants {
         case operatingSystem    = "os"
         case browser            = "br"
         case application        = "app"
+        case traceId            = "tid"
         // Model Constants
         case userId             = "uid"
     }

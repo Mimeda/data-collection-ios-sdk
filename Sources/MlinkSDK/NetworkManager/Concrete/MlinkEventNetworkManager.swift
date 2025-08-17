@@ -67,7 +67,8 @@ final class MlinkEventNetworkManager: IMlinkNetwork{
             .lineItemIds: lineItemIds,
             .application: "\(Mlink.app!)",
             .loyaltyCard: payload.loyaltyCard,
-            .operatingSystem: "iOS"
+            .operatingSystem: "iOS",
+            .traceId: UUID().uuidString
             
         ]
         

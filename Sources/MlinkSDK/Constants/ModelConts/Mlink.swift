@@ -5,7 +5,7 @@ import Foundation
 final public class Mlink {
     static var app: String!
     static var isLogEnabled: Bool!
-    static var version: String = "1.1.1"
+    static var version: String = "1.1.3"
     static var isInitialized: Bool = false
     
     
